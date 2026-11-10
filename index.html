@@ -762,10 +762,14 @@ $('#finish-pepero').addEventListener('click', async () => {
     showComplete(gift);
 
     toast('선물이 안전하게 저장되었어요!');
-  } catch (error) {
-    console.error(error);
-    toast('선물 저장에 실패했어요. 다시 시도해 주세요.');
-  } finally {
+} catch (error) {
+  console.error('빼빼로 저장 실패 상세 원인:', error);
+
+  toast(
+    '저장 실패: ' +
+    (error?.message || String(error))
+  );
+} finally {
     button.disabled = false;
     button.innerHTML = '빼빼로 완성하기 <span>→</span>';
   }
@@ -1087,9 +1091,13 @@ $('#finish-box').addEventListener('click', async () => {
 
     toast('선물 상자가 저장되었어요!');
   } catch (error) {
-    console.error(error);
-    toast('선물 저장에 실패했어요. 다시 시도해 주세요.');
-  } finally {
+  console.error('선물 상자 저장 실패 상세 원인:', error);
+
+  toast(
+    '저장 실패: ' +
+    (error?.message || String(error))
+  );
+} finally {
     button.disabled = false;
     button.innerHTML = '선물 상자 완성하기 <span>→</span>';
     updateProbability();
